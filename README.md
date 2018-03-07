@@ -1,0 +1,11 @@
+# Arduino Techno Music Visualizer using NeoPixels and the Spectrum Shield spectrum analyzer 
+
+I'm a volunteer at the [Idea Fab Labs](https://santacruz.ideafablabs.com/) maker/hacker/artspace here in Santa Cruz, and I was asked to take an Arduino Uno, [Spectrum Shield](https://www.sparkfun.com/products/13116) audio spectrum analyzer Arduino shield, and a strip of [NeoPixels](https://learn.adafruit.com/adafruit-neopixel-uberguide/the-magic-of-neopixels), and write an Arduino sketch that, when you played a techno song like [Aaliyah - Rock The Boat (AtYyA Remix)](https://www.youtube.com/watch?v=lO6Vz_cvsGo), on each drumbeat the NeoPixels would go to full brightness and then fade. I'll probably add more features to this visualizer later, but right now it's just a short simple sketch that does what it was supposed to do.
+
+To run it, you'll need to install the [FastLED](http://fastled.io/) Arduino NeoPixels library, and in the sketch set the variables `NUM_LEDS` to the number of NeoPixels in your NeoPixel strip or shield, `LED_TYPE` to the type of NeoPixels or NeoPixel-like LEDs in your strip or shield (see the [FastLED library site](http://fastled.io/) for more info on using different types of NeoPixels), and `COLOR_ORDER` to the color order used by your LEDs.
+
+Note that the audio input on the Spectrum Shield is not very sensitive -- when you're running music or other audio into it you need to have the volume set much higher than you would need to for headphones. 
+
+The Spectrum Shield splits stereo audio input into seven bands for each of the two channels, so you're looking at the volume of a frequency band rather than being able to isolate a particular frequency. In experimenting with the seven bands I found that band 4 worked best with the techno music we were using, to respond to all the drumbeats but ignore the other elements of the music. In the sketch I set a value of `DRUM_VOLUME_THRESHOLD` to 170 (out of 255), but it's really going to depend on the volume of the music you've got going into the audio input -- too low a volume and some or all of the drumbeats won't be loud enough for that threshold, or with the volume too high, some other musical elements that include frequencies within that band may trigger it as well.
+
+Have fun!
